@@ -58,6 +58,7 @@ const Navbar = () => {
                         onClick={() => setMobileMenuOpen(true)}
                     >
                         <div className="toggle-line"></div>
+                        <div className="toggle-line mid"></div>
                         <div className="toggle-line short"></div>
                     </button>
                 </div>

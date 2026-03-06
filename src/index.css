@@ -40,15 +40,20 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  font-family: var(--font-primary);
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
   background-color: var(--color-bg);
   color: var(--color-text);
+}
+
+body {
+  font-family: var(--font-primary);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
-  position: relative;
 }
 
 body::after {
@@ -172,12 +177,13 @@ ul {
 
 /* Navbar Styles Refined */
 .navbar {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
-  padding: 1.5rem 0;
+  z-index: 10000 !important;
+  /* Extremely high priority */
+  padding: 1rem 0;
   transition: all var(--tr-smooth);
 }
 
@@ -245,23 +251,43 @@ ul {
 
 .mobile-toggle {
   display: none;
+  /* Hidden on desktop */
   flex-direction: column;
-  gap: 6px;
-  background: none;
-  border: none;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   cursor: pointer;
+  z-index: 10001;
+  transition: all 0.3s ease;
+}
+
+.mobile-toggle:active {
+  transform: scale(0.9);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 .toggle-line {
-  width: 30px;
-  height: 2px;
+  width: 24px;
+  height: 1.5px;
+  /* Thinner = more premium */
   background: var(--color-gold);
-  transition: all var(--tr-smooth);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.toggle-line.mid {
+  width: 18px;
 }
 
 .toggle-line.short {
-  width: 20px;
-  align-self: flex-end;
+  width: 12px;
 }
 
 /* Mobile Menu Overlay */
@@ -271,9 +297,11 @@ ul {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  z-index: 2000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 10001;
+  /* Above navbar */
   display: flex;
   justify-content: flex-end;
 }
@@ -294,7 +322,9 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .menu-label {
@@ -305,10 +335,21 @@ ul {
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  color: var(--color-text);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--color-gold);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-btn:active {
+  transform: scale(0.9);
 }
 
 .mobile-links {
@@ -320,11 +361,15 @@ ul {
 
 .mobile-links a {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 2rem;
+  /* Was too large maybe? Let's keep it elegant */
   color: var(--color-text);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
 }
 
 .link-idx {
@@ -354,10 +399,6 @@ ul {
 @media (max-width: 992px) {
   .desktop-nav {
     display: none;
-  }
-
-  .mobile-toggle {
-    display: block;
   }
 }
 
@@ -421,13 +462,23 @@ ul {
 .hero-title-reveal {
   font-family: var(--font-heading);
   font-size: clamp(3rem, 10vw, 7rem);
-  line-height: 0.9;
+  line-height: 1;
+  /* Slightly more air */
   letter-spacing: -2px;
   color: var(--color-text);
   margin-bottom: 2.5rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 0.5em;
+  /* Spacing between words */
+}
+
+.title-word {
+  display: flex;
+  white-space: nowrap;
+  /* Prevent word breaking */
+  justify-content: center;
 }
 
 .hero-description-premium {
@@ -533,13 +584,407 @@ ul {
 
 @media (max-width: 768px) {
   .hero-title-reveal {
-    font-size: 4rem;
-    letter-spacing: 0;
+    font-size: clamp(2rem, 12vw, 4rem);
+    /* Slightly smaller ceiling */
+    letter-spacing: -1px;
+    gap: 0.1rem;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .title-word {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+  }
+
+  .hero-description-premium {
+    font-size: 1rem;
+    padding: 0 10%;
+    margin-bottom: 3rem;
+    line-height: 1.6;
   }
 
   .hero-actions-new {
     flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
+    padding: 0 1.5rem;
+  }
+
+  .hero-actions-new .btn-primary-glow {
+    width: 100%;
+    text-align: center;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-toggle {
+    display: flex !important;
+  }
+
+  .logo {
+    width: 180px;
+  }
+
+  .desktop-logo {
+    height: 120px;
+    margin-left: -15px;
+  }
+
+  /* Atmosphere Section Mobile */
+  .atmosphere-premium {
+    padding: 4rem 0;
+  }
+
+  .atmosphere-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .atm-info-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 2rem 1rem !important;
+    margin-bottom: 0 !important;
+    text-align: center;
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .stat-val {
+    font-size: 2.5rem;
+  }
+
+  .stat-txt {
+    font-size: 0.6rem;
+  }
+
+  .atm-stats {
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .atm-bottom-text {
+    border-left: none;
+    border-top: 1px solid var(--color-gold);
+    padding: 1.5rem 0 0 0;
+    margin-top: 2rem;
+  }
+
+  .atm-media-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .atm-floating-accent {
+    position: relative !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    margin: -2rem auto 0 auto;
+  }
+
+  .accent-inner {
+    width: 90px;
+    height: 90px;
+    padding: 1rem;
+  }
+
+  .atm-bg-text {
+    font-size: 6rem;
+    top: auto;
+    bottom: 0;
+    transform: none;
+    opacity: 0.03;
+    width: 100%;
+    text-align: center;
+    right: 0;
+  }
+
+  /* Scroll Bump */
+  .atm-scroll-bump {
+    width: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Zones Radical Reset */
+  .zones-premium {
+    padding: 6rem 0 4rem 0 !important;
+  }
+
+  .zones-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 2rem !important;
+    margin-bottom: 3rem !important;
+  }
+
+  .zones-nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  .zones-nav-item {
+    padding: 0.8rem 1rem !important;
+    font-size: 0.75rem !important;
+    border: 1px solid rgba(212, 175, 55, 0.2) !important;
+    border-radius: 4px !important;
+  }
+
+  .zones-nav-item.active {
+    background: rgba(212, 175, 55, 0.1) !important;
+    border-color: var(--color-gold) !important;
+  }
+
+  .active-line {
+    display: none !important;
+    /* Hide line, use border/bg for active state on mobile */
+  }
+
+  .luxury-card {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    /* Reduced gap */
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+  }
+
+  .luxury-card-info {
+    order: 1 !important;
+    padding: 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .luxury-title {
+    font-size: 3rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .luxury-desc {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.5rem !important;
+    opacity: 0.8 !important;
+  }
+
+  .luxury-features {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem 1.5rem !important;
+    /* Tighter vertical gap */
+    text-align: left !important;
+    margin: 2rem auto 3rem auto !important;
+    width: fit-content !important;
+  }
+
+  .luxury-features li {
+    font-size: 0.8rem !important;
+    white-space: nowrap !important;
+  }
+
+  .luxury-actions {
+    margin-bottom: 3rem !important;
+  }
+
+  .luxury-card-media {
+    order: 2 !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    margin: 0 auto !important;
+  }
+
+  .luxury-img-wrapper {
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+
+  .zones-bg-number {
+    display: none !important;
+  }
+
+  .menu-bg-accent {
+    display: none !important;
+  }
+
+  /* Atmosphere Radical Reset */
+  .atmosphere-premium {
+    padding: 6rem 0 4rem 0 !important;
+    overflow: hidden;
+  }
+
+  .atmosphere-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0 !important;
+    padding: 0 1.5rem !important;
+    text-align: center !important;
+    transform: none !important;
+  }
+
+  .atm-info-card {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 0 3rem 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    z-index: 5 !important;
+  }
+
+  .atm-title {
+    font-size: 3rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .atm-desc {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .atm-stats {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 3rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .stat-val {
+    font-size: 2.5rem !important;
+  }
+
+  .atm-bottom-text {
+    border: none !important;
+    padding: 0 !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 4rem !important;
+  }
+
+  .atm-media-container {
+    width: 100% !important;
+    max-width: 450px !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    position: relative !important;
+  }
+
+  .atm-video-box {
+    aspect-ratio: 1 / 1 !important;
+    /* Square for mobile looks better */
+    border-radius: 8px !important;
+  }
+
+  .atm-floating-accent {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    left: auto !important;
+    margin: -3rem auto 0 auto !important;
+    /* Overlap image slightly but centered */
+    transform: none !important;
+    z-index: 10 !important;
+  }
+
+  .accent-inner {
+    width: 100px !important;
+    height: 100px !important;
+    padding: 1rem !important;
+  }
+
+  .atm-bg-text {
+    display: none !important;
+    /* Hide giant text on mobile for clarity */
+  }
+
+  /* Scroll Bump */
+  .atm-scroll-bump {
+    width: 60px !important;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Zones Mobile Fix */
+  .luxury-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .zones-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .zone-tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .luxury-img-wrapper {
+    height: 40vh;
+  }
+
+  /* Scroll Bump refined mobile */
+  .bump-curve {
+    width: 60px;
+    height: 30px;
+    border-radius: 30px 30px 0 0;
+    padding-top: 5px;
+  }
+
+  .bump-curve svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title-reveal {
+    font-size: 2.5rem;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  .desktop-logo {
+    height: 120px;
+    margin-left: -20px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 400px) {
+  .hero-title-reveal {
+    font-size: 2.2rem;
   }
 }
 
@@ -895,9 +1340,11 @@ ul {
 }
 
 .feature-icon {
-  width: 8px;
-  height: 1px;
+  width: 4px;
+  height: 4px;
   background: var(--color-gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
 }
 
 .btn-gold-outline {
@@ -1527,7 +1974,7 @@ ul {
 
   .map-premium-wrapper {
     height: 400px;
-    order: -1;
+    order: 2;
   }
 
   .footer-nav {

@@ -149,7 +149,6 @@ const Zones = () => {
                 </div>
             </div>
 
-            <div className="zones-bg-number">{zones[activeTab].label}</div>
         </section>
     );
 };

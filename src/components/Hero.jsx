@@ -15,7 +15,6 @@ const Hero = () => {
     const brightness = useTransform(scrollYProgress, [0, 1], [1, 0.4]);
     const brightnessTemplate = useMotionTemplate`brightness(${brightness})`;
 
-    const titleLetters = "JETI QAZYNA".split("");
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -68,14 +67,18 @@ const Hero = () => {
                         initial="hidden"
                         animate="visible"
                     >
-                        {titleLetters.map((char, index) => (
-                            <motion.span
-                                key={index}
-                                variants={letterVariants}
-                                style={{ display: 'inline-block', marginRight: char === " " ? "1.5rem" : "0" }}
-                            >
-                                {char}
-                            </motion.span>
+                        {["JETI", "QAZYNA"].map((word, wIndex) => (
+                            <div key={wIndex} className="title-word">
+                                {word.split("").map((char, cIndex) => (
+                                    <motion.span
+                                        key={`${wIndex}-${cIndex}`}
+                                        variants={letterVariants}
+                                        style={{ display: 'inline-block' }}
+                                    >
+                                        {char}
+                                    </motion.span>
+                                ))}
+                            </div>
                         ))}
                     </motion.h1>
 
