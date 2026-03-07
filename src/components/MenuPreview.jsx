@@ -1,26 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const MenuPreview = () => {
+    const { t } = useTranslation();
     const categories = [
         {
             id: "national",
-            title: "Национальная Кухня",
-            subtitle: "Вкус степных традиций",
+            title: t('menu.title'),
+            subtitle: t('menu.desc'),
             items: [
-                { name: "Бешбармак", price: "12 000", desc: "Конина, баранина, тонкое домашнее тесто." },
-                { name: "Куырдак", price: "5 500", desc: "Свежая баранина, картофель, луковая заправка." },
-                { name: "Сырне", price: "8 000", desc: "Молодая баранина, томленная 6 часов." }
+                { name: t('menu.dish_besh'), price: "12 000", desc: t('menu.dish_besh_desc') },
+                { name: t('menu.dish_kuyrdak'), price: "5 500", desc: t('menu.dish_kuyrdak_desc') },
+                { name: t('menu.dish_sirne'), price: "8 000", desc: t('menu.dish_sirne_desc') }
             ]
         },
         {
             id: "grill",
-            title: "Мангал & Гриль",
-            subtitle: "Аромат живого огня",
+            title: t('menu.cat_grill_title'),
+            subtitle: t('menu.cat_grill_subtitle'),
             items: [
-                { name: "Шашлык Баран", price: "2 800", desc: "Мякоть барашка в фирменном маринаде." },
-                { name: "Люля-Кебаб", price: "2 500", desc: "Рубленое мясо с восточными пряностями." },
-                { name: "Ассорти", price: "15 000", desc: "Плато из 5 видов мяса для большой компании." }
+                { name: t('menu.dish_shashlik'), price: "2 800", desc: t('menu.dish_shashlik_desc') },
+                { name: t('menu.dish_lula'), price: "2 500", desc: t('menu.dish_lula_desc') },
+                { name: t('menu.dish_assorti'), price: "15 000", desc: t('menu.dish_assorti_desc') }
             ]
         }
     ];
@@ -35,8 +37,8 @@ const MenuPreview = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="premium-label">КУХНЯ</span>
-                        <h2 className="premium-title">Избранное Меню</h2>
+                        <span className="premium-label">{t('menu.label')}</span>
+                        <h2 className="premium-title">{t('menu.title')}</h2>
                     </motion.div>
                 </div>
 
@@ -85,13 +87,13 @@ const MenuPreview = () => {
                     viewport={{ once: true }}
                 >
                     <a href="https://wa.me/77774344050" target="_blank" rel="noopener noreferrer" className="btn btn-gold-fill">
-                        ПОЛНОЕ МЕНЮ В WHATSAPP
+                        {t('menu.btn_full_menu')}
                     </a>
                 </motion.div>
             </div>
 
             {/* Background decorative text */}
-            <div className="menu-bg-accent">ДӘМ</div>
+            <div className="menu-bg-accent">{t('menu.bg_text')}</div>
         </section>
     );
 };

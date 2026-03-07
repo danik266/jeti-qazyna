@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Atmosphere = () => {
+    const { t } = useTranslation();
     const sectionRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -49,26 +51,25 @@ const Atmosphere = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <span className="atm-label">ИСТОРИЯ</span>
-                        <h2 className="atm-title">Жеті Қазына</h2>
+                        <span className="atm-label">{t('atmosphere.label')}</span>
+                        <h2 className="atm-title">{t('atmosphere.title')}</h2>
                         <p className="atm-desc">
-                            Оазис казахского гостеприимства в самом сердце Павлодара.
-                            Мы создали пространство, где вековые традиции встречаются с современным комфортом.
+                            {t('atmosphere.desc_p1')}
                         </p>
 
                         <div className="atm-stats">
                             <div className="atm-stat">
                                 <span className="stat-val">04</span>
-                                <span className="stat-txt">VIP ЗАЛОВ</span>
+                                <span className="stat-txt">{t('atmosphere.stat_vip')}</span>
                             </div>
                             <div className="atm-stat">
                                 <span className="stat-val">150</span>
-                                <span className="stat-txt">МЕСТ</span>
+                                <span className="stat-txt">{t('atmosphere.stat_halls')}</span>
                             </div>
                         </div>
 
                         <div className="atm-bottom-text">
-                            <p>Интерьер, вдохновленный сокровищами степи. Каждый орнамент, каждая деталь рассказывает свою историю.</p>
+                            <p>{t('atmosphere.desc_p2')}</p>
                         </div>
                     </motion.div>
 
@@ -104,7 +105,7 @@ const Atmosphere = () => {
                             }}
                         >
                             <div className="accent-inner">
-                                <span>ТРАДИЦИИ</span>
+                                <span>{t('atmosphere.stat_yurts')}</span>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -112,7 +113,7 @@ const Atmosphere = () => {
             </div>
 
             {/* Background large decorative text */}
-            <div className="atm-bg-text">МҰРА</div>
+            <div className="atm-bg-text">{t('atmosphere.bg_text')}</div>
         </section>
     );
 };

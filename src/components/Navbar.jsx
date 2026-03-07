@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, Instagram } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
+    const { t, i18n } = useTranslation();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -14,12 +16,17 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const toggleLanguage = () => {
+        const newLang = i18n.language === 'ru' ? 'kz' : 'ru';
+        i18n.changeLanguage(newLang);
+    };
+
     const navLinks = [
-        { name: 'О нас', href: '#atmosphere' },
-        { name: 'Залы', href: '#zones' },
-        { name: 'Меню', href: '#menu' },
-        { name: 'Галерея', href: '#gallery' },
-        { name: 'Контакты', href: '#contact' },
+        { name: t('nav.about'), href: '#atmosphere' },
+        { name: t('nav.zones'), href: '#zones' },
+        { name: t('nav.menu'), href: '#menu' },
+        { name: t('nav.gallery'), href: '#gallery' },
+        { name: t('nav.contacts'), href: '#contact' },
     ];
 
     return (
@@ -38,7 +45,7 @@ const Navbar = () => {
                     <div className="desktop-nav">
                         {navLinks.map((link, idx) => (
                             <motion.a
-                                key={link.name}
+                                key={link.href}
                                 href={link.href}
                                 className="nav-link"
                                 whileHover={{ y: -2 }}
@@ -49,18 +56,26 @@ const Navbar = () => {
                             </motion.a>
                         ))}
                         <a href="tel:+77774344050" className="btn btn-outline nav-btn">
-                            БРОНИРОВАНИЕ
+                            {t('nav.booking')}
                         </a>
+                        <button onClick={toggleLanguage} className="lang-switcher desktop-lang">
+                            {i18n.language === 'ru' ? 'KZ' : 'RU'}
+                        </button>
                     </div>
 
-                    <button
-                        className="mobile-toggle"
-                        onClick={() => setMobileMenuOpen(true)}
-                    >
-                        <div className="toggle-line"></div>
-                        <div className="toggle-line mid"></div>
-                        <div className="toggle-line short"></div>
-                    </button>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                        <button onClick={toggleLanguage} className="lang-switcher mobile-lang">
+                            {i18n.language === 'ru' ? 'KZ' : 'RU'}
+                        </button>
+                        <button
+                            className="mobile-toggle"
+                            onClick={() => setMobileMenuOpen(true)}
+                        >
+                            <div className="toggle-line"></div>
+                            <div className="toggle-line mid"></div>
+                            <div className="toggle-line short"></div>
+                        </button>
+                    </div>
                 </div>
             </motion.nav>
 
@@ -80,7 +95,7 @@ const Navbar = () => {
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                         >
                             <div className="mobile-menu-header">
-                                <span className="menu-label">MENU</span>
+                                <span className="menu-label">{t('nav.menu_label')}</span>
                                 <button className="close-btn" onClick={() => setMobileMenuOpen(false)}>
                                     <X size={32} />
                                 </button>
@@ -89,7 +104,7 @@ const Navbar = () => {
                             <div className="mobile-links">
                                 {navLinks.map((link, idx) => (
                                     <motion.a
-                                        key={link.name}
+                                        key={link.href}
                                         href={link.href}
                                         initial={{ opacity: 0, x: 50 }}
                                         animate={{ opacity: 1, x: 0 }}

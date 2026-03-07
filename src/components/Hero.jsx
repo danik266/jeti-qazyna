@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+    const { t } = useTranslation();
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -88,8 +90,7 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 1.5 }}
                     >
-                        <span className="gold-italic">Қазақ мәдениетінің жұпар иісі</span> —
-                        оазис гостеприимства и изысканной кухни в центре Павлодара.
+                        <span className="gold-italic">{t('hero.quote_kazakh')}</span> {t('hero.description')}
                     </motion.p>
 
                     <motion.div
@@ -98,8 +99,8 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 1.8 }}
                     >
-                        <a href="#atmosphere" className="btn btn-primary-glow">ОТКРЫТЬ АТМОСФЕРУ</a>
-                        <a href="#zones" className="btn btn-minimal">НАШИ ЗАЛЫ</a>
+                        <a href="#atmosphere" className="btn btn-primary-glow">{t('hero.btn_atmosphere')}</a>
+                        <a href="#zones" className="btn btn-minimal">{t('hero.btn_zones')}</a>
                     </motion.div>
                 </motion.div>
             </div>

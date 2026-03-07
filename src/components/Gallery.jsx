@@ -1,15 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const Gallery = () => {
+    const { t } = useTranslation();
     const items = [
-        { type: "img", src: "/videos/вип.jpg", title: "VIP Караоке", size: "large" },
-        { type: "video", src: "/videos/vip-karaoke.mp4", title: "VIP Зал Баян-Сулу", size: "small" },
-        { type: "img", src: "/videos/основной зал.jpg", title: "Основной Зал", size: "small" },
-        { type: "video", src: "/videos/atmosphere.mp4", title: "Атмосфера", size: "medium" },
-        { type: "img", src: "/videos/юрты.jpg", title: "Юрты", size: "small" },
-        { type: "video", src: "/videos/mangal.mp4", title: "Мангал", size: "small" },
-        { type: "img", src: "/videos/тапчаны.jpg", title: "Топчаны", size: "medium" },
+        { type: "img", src: "/videos/вип.jpg", title: t('gallery.item_vip'), size: "large" },
+        { type: "video", src: "/videos/vip-karaoke.mp4", title: t('gallery.item_bayan'), size: "small" },
+        { type: "img", src: "/videos/основной зал.jpg", title: t('gallery.item_main'), size: "small" },
+        { type: "video", src: "/videos/atmosphere.mp4", title: t('gallery.item_atmosphere'), size: "medium" },
+        { type: "img", src: "/videos/юрты.jpg", title: t('gallery.item_yurts'), size: "small" },
+        { type: "video", src: "/videos/mangal.mp4", title: t('gallery.item_mangal'), size: "small" },
+        { type: "img", src: "/videos/тапчаны.jpg", title: t('gallery.item_topchans'), size: "medium" },
     ];
 
     return (
@@ -22,8 +24,8 @@ const Gallery = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="premium-label">ГАЛЕРЕЯ</span>
-                        <h2 className="premium-title">Наши Будни</h2>
+                        <span className="premium-label">{t('gallery.label')}</span>
+                        <h2 className="premium-title">{t('gallery.title')}</h2>
                     </motion.div>
                 </div>
 
@@ -61,7 +63,7 @@ const Gallery = () => {
                     viewport={{ once: true }}
                 >
                     <a href="https://www.instagram.com/jeti.qazyna.pvl/" target="_blank" rel="noopener noreferrer" className="insta-link">
-                        <span>ЖДЕМ ВАС В INSTAGRAM</span>
+                        <span>{t('gallery.btn_instagram')}</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>

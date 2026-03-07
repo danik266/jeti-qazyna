@@ -1,40 +1,42 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const Zones = () => {
+    const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState(0);
 
     const zones = [
         {
             id: "vip",
             label: "01",
-            title: "VIP Караоке",
-            description: "Эксклюзивное пространство для тех, кто ценит приватность и безупречный звук. Наши VIP-залы оснащены топовыми системами AST, профессиональной акустикой и интерьером, который настраивает на волну вдохновения.",
-            features: ["Система AST 2024", "Индивидуальный сервис", "Кнопка вызова", "До 20 персон"],
+            title: t('zones.vip_title'),
+            description: t('zones.vip_desc'),
+            features: t('zones.vip_features', { returnObjects: true }),
             image: "/videos/вип.jpg"
         },
         {
             id: "yurts",
             label: "02",
-            title: "Юрты",
-            description: "Аутентичный опыт в современном прочтении. Погрузитесь в атмосферу кочевников, не жертвуя комфортом. Идеально для семейных торжеств и встреч, где важна душа и традиции.",
-            features: ["Этно-дизайн", "Приватный вход", "Теплые полы", "До 25 персон"],
+            title: t('zones.yurts_title'),
+            description: t('zones.yurts_desc'),
+            features: t('zones.yurts_features', { returnObjects: true }),
             image: "/videos/юрты.jpg"
         },
         {
             id: "topchans",
             label: "03",
-            title: "Топчаны",
-            description: "Летняя классика в премиальном исполнении. Мягкие корпе, свежий воздух и гранд-тапчан — сердце нашего летнего оазиса. Лучший способ провести вечер за неспешной беседой.",
-            features: ["Гранд-тапчан", "Мягкие корпе", "Защита от солнца", "Летний сезон"],
+            title: t('zones.topchans_title'),
+            description: t('zones.topchans_desc'),
+            features: t('zones.topchans_features', { returnObjects: true }),
             image: "/videos/тапчаны.jpg"
         },
         {
             id: "main",
             label: "04",
-            title: "Основной Зал",
-            description: "Величие и масштаб для ваших главных событий. Зал-трансформер, способный принять до 150 гостей, обеспечивая идеальный обзор и превосходную акустику для любого торжества.",
-            features: ["Сцена & Свет", "Зона для танцев", "Банкет-менеджер", "До 150 персон"],
+            title: t('zones.main_title'),
+            description: t('zones.main_desc'),
+            features: t('zones.main_features', { returnObjects: true }),
             image: "/videos/основной зал.jpg"
         }
     ];
@@ -49,8 +51,8 @@ const Zones = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="section-label">ПРОСТРАНСТВА</span>
-                        <h2 className="premium-title">Наши Залы</h2>
+                        <span className="section-label">{t('zones.label')}</span>
+                        <h2 className="premium-title">{t('zones.title')}</h2>
                     </motion.div>
 
                     <nav className="zones-nav">
@@ -123,7 +125,7 @@ const Zones = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.6 }}
                                 >
-                                    <a href="#contact" className="btn btn-gold-outline">УЗНАТЬ СТОИМОСТЬ</a>
+                                    <a href="#contact" className="btn btn-gold-outline">{t('zones.btn_price')}</a>
                                 </motion.div>
                             </div>
 
@@ -140,7 +142,7 @@ const Zones = () => {
                                         className="luxury-img"
                                     />
                                     {/* Background decorative text */}
-                                    <div className="menu-bg-accent">ДӘМ</div>
+                                    <div className="menu-bg-accent">{t('zones.bg_text')}</div>
                                     <div className="luxury-mask"></div>
                                 </motion.div>
                             </div>

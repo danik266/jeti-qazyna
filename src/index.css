@@ -42,7 +42,7 @@
 
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   position: relative;
   background-color: var(--color-bg);
@@ -811,13 +811,16 @@ ul {
   .luxury-card-media {
     order: 2 !important;
     width: 100% !important;
+    height: auto !important;
     max-width: 500px !important;
     margin: 0 auto !important;
   }
 
   .luxury-img-wrapper {
     height: auto !important;
-    aspect-ratio: 16 / 9 !important;
+    aspect-ratio: 4 / 3 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
   }
 
   .zones-bg-number {
@@ -1662,6 +1665,43 @@ ul {
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--tr-smooth) 0.1s;
+}
+
+.lang-switcher {
+  background: transparent;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold);
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--tr-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-switcher:hover {
+  background: rgba(212, 175, 55, 0.1);
+  color: #fff;
+}
+
+.mobile-lang {
+  display: none !important;
+}
+
+@media (max-width: 992px) {
+  .desktop-lang {
+    display: none !important;
+  }
+
+  .mobile-lang {
+    display: flex !important;
+  }
 }
 
 .bento-item:hover .bento-media {
